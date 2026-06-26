@@ -1,0 +1,3096 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VetCare — Clínica Veterinária Premium em Curitiba</title>
+<meta name="description" content="Cuidado veterinário de excelência com tecnologia, sofisticação e acolhimento. Agende uma consulta para o seu pet.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===== css/design-system.css ===== */
+/* ============================================================
+   DESIGN SYSTEM — VETCARE (placeholder)
+   Clínica Veterinária Premium
+   ------------------------------------------------------------
+   Direção: clínica de alto padrão, não "petshop fofo".
+   Verde profundo de floresta como base + verde vivo de destaque
+   + areia/dourado como apoio quente. Serifado no display para
+   transmitir confiança clínica; sans neutra no corpo/UI.
+   Assinatura: trilha de pegadas que acompanha a jornada de scroll.
+
+   REGRA: nenhuma cor, espaçamento, raio ou sombra é usado
+   diretamente no CSS fora deste arquivo. Tudo via var(--token).
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     1. COR — Tokens primitivos
+     ---------------------------------------------------------- */
+
+  /* Verde — base da marca (floresta profunda, não menta) */
+  --color-green-primary:      #1B4332;   /* verde primário — base de marca */
+  --color-green-secondary:    #2D6A4F;   /* verde secundário — apoio, ícones, texto sobre claro */
+  --color-green-hover:        #40916C;   /* verde hover — estados interativos */
+  --color-green-glow:         #74C69D;   /* verde glow — luz, brilho, partículas */
+  --color-green-dark:         #081C15;   /* verde escuro — fundo profundo, seções dark */
+  --color-green-transparent:  rgba(27, 67, 50, 0.08); /* verde transparente — washes, overlays */
+  --color-green-transparent-strong: rgba(27, 67, 50, 0.55);
+
+  /* Apoio quente — areia/dourado (clínico + natural, nunca infantil) */
+  --color-sand:                #E8DCC4;  /* areia — fundo alternativo quente */
+  --color-gold:                 #C9A961; /* dourado — detalhes premium, selos, divisores */
+  --color-gold-soft:            rgba(201, 169, 97, 0.18);
+
+  /* Neutros */
+  --color-white:               #FFFFFF;
+  --color-gray-50:              #F7F8F6;  /* fundo claro principal */
+  --color-gray-100:             #ECEEE9;  /* fundo de cards sobre claro */
+  --color-gray-200:             #D8DBD2;  /* bordas leves, divisores */
+  --color-gray-300:             #AEB3A4;  /* texto secundário sobre claro */
+  --color-black-soft:           #10140F;  /* preto suave — texto principal, nunca #000 puro */
+
+  /* Funcionais derivados */
+  --color-shadow:               rgba(8, 28, 21, 0.28);   /* cor-base para sombras (verde-preto) */
+  --color-border:                rgba(27, 67, 50, 0.14); /* cor-base para bordas sutis */
+  --color-glass-bg:              rgba(247, 248, 246, 0.62);
+  --color-glass-bg-dark:         rgba(8, 28, 21, 0.55);
+  --color-glass-border:          rgba(255, 255, 255, 0.22);
+
+  /* Texto semântico */
+  --color-text-primary:          var(--color-black-soft);
+  --color-text-secondary:        var(--color-green-secondary);
+  --color-text-muted:            var(--color-gray-300);
+  --color-text-on-dark:          var(--color-gray-50);
+  --color-text-on-dark-muted:    rgba(247, 248, 246, 0.68);
+
+  /* Superfícies semânticas */
+  --color-surface-light:         var(--color-gray-50);
+  --color-surface-card:          var(--color-white);
+  --color-surface-dark:          var(--color-green-dark);
+  --color-surface-accent:        var(--color-sand);
+
+
+  /* ----------------------------------------------------------
+     2. TIPOGRAFIA
+     ---------------------------------------------------------- */
+
+  /* Famílias — display serifado (confiança clínica) + sans utilitária */
+  --font-display: "Fraunces", "Source Serif 4", Georgia, serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    "JetBrains Mono", "Courier New", monospace; /* para dados, badges técnicos */
+
+  /* Escala fluida via clamp() — min, preferred(vw), max */
+  --text-hero:     clamp(2.75rem, 1.6rem + 5.5vw, 6.5rem);
+  --text-display:  clamp(2.25rem, 1.4rem + 4vw, 4.5rem);
+  --text-h1:        clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+  --text-h2:        clamp(1.6rem, 1.2rem + 1.8vw, 2.5rem);
+  --text-h3:        clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+  --text-h4:        clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-body:       clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-small:      clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-caption:    clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
+
+  /* Pesos */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Altura de linha */
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.7;
+
+  /* Espaçamento entre letras */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.04em;
+  --tracking-widest: 0.12em; /* para eyebrows/labels em caps */
+
+
+  /* ----------------------------------------------------------
+     3. ESPAÇAMENTO — escala fixa em rem (base 4px / 16px raiz)
+     ---------------------------------------------------------- */
+
+  --space-1:    0.25rem;  /* 4px */
+  --space-2:    0.5rem;   /* 8px */
+  --space-3:    0.75rem;  /* 12px */
+  --space-4:    1rem;     /* 16px */
+  --space-5:    1.25rem;  /* 20px */
+  --space-6:    1.5rem;   /* 24px */
+  --space-8:    2rem;     /* 32px */
+  --space-10:   2.5rem;   /* 40px */
+  --space-12:   3rem;     /* 48px */
+  --space-16:   4rem;     /* 64px */
+  --space-20:   5rem;     /* 80px */
+  --space-24:   6rem;     /* 96px */
+  --space-32:   8rem;     /* 128px */
+
+  /* Espaçamento de seção (responsivo via clamp, derivado da escala acima) */
+  --space-section-y:  clamp(var(--space-20), 10vw, var(--space-32));
+  --space-section-x:  clamp(var(--space-5), 6vw, var(--space-16));
+
+
+  /* ----------------------------------------------------------
+     4. BORDER RADIUS
+     ---------------------------------------------------------- */
+
+  --radius-sm:    0.5rem;    /* 8px  — inputs, badges */
+  --radius-md:    1rem;      /* 16px — cards pequenos, botões */
+  --radius-lg:    1.5rem;    /* 24px — cards grandes, modais */
+  --radius-xl:    2.5rem;    /* 40px — seções, imagens hero */
+  --radius-full:  999px;     /* circular — avatares, pills, botão icon */
+
+
+  /* ----------------------------------------------------------
+     5. SOMBRAS
+     ---------------------------------------------------------- */
+
+  --shadow-xs:  0 1px 2px var(--color-shadow);
+  --shadow-sm:  0 2px 8px var(--color-shadow);
+  --shadow-md:  0 8px 24px -4px var(--color-shadow);
+  --shadow-lg:  0 16px 40px -8px var(--color-shadow);
+  --shadow-xl:  0 32px 64px -12px var(--color-shadow);
+
+  --shadow-glow-green: 0 0 24px 4px rgba(116, 198, 157, 0.45);
+  --shadow-glow-gold:  0 0 20px 2px rgba(201, 169, 97, 0.35);
+
+  --shadow-glass: 0 8px 32px var(--color-shadow), inset 0 1px 0 var(--color-glass-border);
+
+
+  /* ----------------------------------------------------------
+     6. GRADIENTES (discretos — uso pontual, nunca como base)
+     ---------------------------------------------------------- */
+
+  --gradient-forest:   linear-gradient(160deg, var(--color-green-dark) 0%, var(--color-green-primary) 100%);
+  --gradient-glow:      radial-gradient(circle, rgba(116, 198, 157, 0.35) 0%, rgba(116, 198, 157, 0) 70%);
+  --gradient-sand:       linear-gradient(180deg, var(--color-sand) 0%, var(--color-surface-light) 100%);
+  --gradient-glass:       linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 100%);
+  --gradient-fade-bottom: linear-gradient(to bottom, transparent 0%, var(--color-surface-light) 100%);
+
+
+  /* ----------------------------------------------------------
+     7. BLUR / GLASS
+     ---------------------------------------------------------- */
+
+  --blur-sm:  blur(8px);
+  --blur-md:  blur(16px);
+  --blur-lg:  blur(32px);
+  --blur-xl:  blur(64px); /* para círculos desfocados decorativos */
+
+
+  /* ----------------------------------------------------------
+     8. TRANSIÇÕES / EASING (para uso em CSS; GSAP usa equivalentes)
+     ---------------------------------------------------------- */
+
+  --ease-default:   cubic-bezier(0.16, 1, 0.3, 1);   /* easeOutExpo-like */
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1); /* leve overshoot elástico */
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+
+  --duration-fast:    0.2s;
+  --duration-normal:  0.4s;
+  --duration-slow:    0.7s;
+  --duration-cinematic: 1.2s;
+
+
+  /* ----------------------------------------------------------
+     9. Z-INDEX — escala nomeada (evita números mágicos)
+     ---------------------------------------------------------- */
+
+  --z-base:        1;
+  --z-decorative:  5;
+  --z-content:     10;
+  --z-navbar:      100;
+  --z-cursor:      200;
+  --z-modal:       500;
+  --z-loading:      900;
+
+
+  /* ----------------------------------------------------------
+     10. CONTAINER / GRID
+     ---------------------------------------------------------- */
+
+  --container-max:  1280px;
+  --container-narrow: 880px;
+}
+
+/* ============================================================
+   Dark-mode tokens (seções com fundo escuro reutilizam os
+   mesmos nomes semânticos, sobrescrevendo o necessário)
+   ============================================================ */
+.theme-dark {
+  --color-text-primary:    var(--color-text-on-dark);
+  --color-text-secondary:  var(--color-green-glow);
+  --color-surface-light:   var(--color-surface-dark);
+  --color-border:          rgba(255, 255, 255, 0.12);
+  --color-glass-bg:        var(--color-glass-bg-dark);
+}
+
+
+/* ===== css/base.css ===== */
+/* ============================================================
+   BASE / RESET
+   ============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-light);
+  overflow-x: hidden;
+  cursor: none; /* cursor customizado assume o controle (desktop) */
+}
+
+@media (max-width: 900px), (hover: none) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+
+img, video, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; border: none; background: none; cursor: pointer; }
+ul, li { list-style: none; }
+svg { display: block; }
+
+::selection {
+  background: var(--color-green-glow);
+  color: var(--color-green-dark);
+}
+
+/* Foco visível — acessibilidade, nunca remover sem substituir */
+:focus-visible {
+  outline: 2px solid var(--color-green-hover);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Respeita preferência de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   Tipografia base
+   ---------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); font-weight: var(--weight-medium); }
+
+p { color: var(--color-text-secondary); }
+
+.text-hero    { font-size: var(--text-hero); font-family: var(--font-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); }
+.text-display { font-size: var(--text-display); font-family: var(--font-display); line-height: var(--leading-tight); }
+.text-small   { font-size: var(--text-small); }
+.text-caption { font-size: var(--text-caption); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-green-hover);
+  font-weight: var(--weight-medium);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.25rem;
+  height: 1px;
+  background: var(--color-green-hover);
+}
+
+/* ----------------------------------------------------------
+   Layout utilitário
+   ---------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-section-x);
+}
+
+.container--narrow { max-width: var(--container-narrow); }
+
+.section {
+  position: relative;
+  padding-block: var(--space-section-y);
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: var(--space-12);
+}
+
+.section-head p {
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Scrollbar customizada (desktop / webkit) */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-gray-100); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-green-secondary);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-gray-100);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green-hover);
+  box-shadow: var(--shadow-glow-green);
+}
+* { scrollbar-color: var(--color-green-secondary) var(--color-gray-100); scrollbar-width: thin; }
+
+
+/* ===== css/components-buttons.css ===== */
+/* ============================================================
+   COMPONENTE: BOTÕES
+   Exclusivos — nunca botão de navegador puro.
+   Estrutura: <button class="btn btn--primary">
+                <span class="btn__paw"></span>
+                <span class="btn__label">Texto</span>
+                <span class="btn__particles"></span>
+              </button>
+   ============================================================ */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-wide);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform var(--duration-normal) var(--ease-spring),
+              box-shadow var(--duration-normal) var(--ease-default);
+  will-change: transform;
+}
+
+.btn:active { transform: scale(0.96); } /* press animation */
+
+.btn--primary {
+  background: var(--color-green-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--primary:hover {
+  background: var(--color-green-hover);
+  box-shadow: var(--shadow-glow-green), var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-green-primary);
+  border: 1.5px solid var(--color-border);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-green-hover);
+  background: var(--color-green-transparent);
+  transform: translateY(-2px);
+}
+
+.btn--on-dark {
+  background: var(--color-glass-bg-dark);
+  color: var(--color-text-on-dark);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: var(--blur-sm);
+}
+
+.btn--on-dark:hover {
+  border-color: var(--color-green-glow);
+  box-shadow: var(--shadow-glow-green);
+}
+
+/* Ripple (gerado via JS adicionando .is-rippling + custom props --x/--y) */
+.btn__ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn.is-rippling .btn__ripple::after {
+  content: "";
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  width: 8px; height: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-full);
+  transform: translate(-50%, -50%) scale(0);
+  animation: btn-ripple var(--duration-slow) var(--ease-default) forwards;
+}
+
+@keyframes btn-ripple {
+  to { transform: translate(-50%, -50%) scale(40); opacity: 0; }
+}
+
+/* Partículas verdes no hover — pseudo-elementos animados via JS toggling class */
+.btn__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn__particles span {
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-green-glow);
+  opacity: 0;
+}
+
+.btn:hover .btn__particles span {
+  animation: btn-particle-float 1.1s var(--ease-default) infinite;
+}
+
+.btn__particles span:nth-child(1) { left: 15%; animation-delay: 0s; }
+.btn__particles span:nth-child(2) { left: 45%; animation-delay: 0.2s; }
+.btn__particles span:nth-child(3) { left: 70%; animation-delay: 0.4s; }
+.btn__particles span:nth-child(4) { left: 90%; animation-delay: 0.1s; }
+
+@keyframes btn-particle-float {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  30%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-22px) scale(0.2); }
+}
+
+/* Patinha passando rapidamente no hover */
+.btn__paw {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-8px) rotate(-12deg) scale(0.6);
+  transition: opacity var(--duration-fast) var(--ease-default),
+              transform var(--duration-normal) var(--ease-spring);
+}
+
+.btn:hover .btn__paw {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg) scale(1);
+}
+
+/* Loading state */
+.btn.is-loading { pointer-events: none; color: transparent; }
+.btn.is-loading::after {
+  content: "";
+  position: absolute;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: var(--color-white);
+  border-radius: var(--radius-full);
+  animation: btn-spin 0.7s linear infinite;
+}
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+
+/* Disabled state */
+.btn:disabled, .btn.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Tamanhos */
+.btn--sm { padding: var(--space-3) var(--space-6); font-size: var(--text-caption); }
+.btn--lg { padding: var(--space-5) var(--space-10); font-size: var(--text-body); }
+
+
+/* ============================================================
+   COMPONENTE: BADGE
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  background: var(--color-green-transparent);
+  color: var(--color-green-primary);
+  border: 1px solid var(--color-border);
+}
+
+.badge--gold {
+  background: var(--color-gold-soft);
+  color: #8A6D2F;
+  border-color: rgba(201, 169, 97, 0.3);
+}
+
+.badge--on-dark {
+  background: rgba(255,255,255,0.08);
+  color: var(--color-green-glow);
+  border-color: var(--color-glass-border);
+}
+
+.badge__dot {
+  width: 6px; height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-green-hover);
+}
+
+
+/* ===== css/components-navbar.css ===== */
+/* ============================================================
+   COMPONENTE: NAVBAR
+   Estados: transparente (topo) -> sólido (scroll) -> reduzida (scroll rápido)
+   Controlado via classes .is-scrolled / .is-compact adicionadas por JS
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 1100px);
+  z-index: var(--z-navbar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background var(--duration-normal) var(--ease-default),
+              border-color var(--duration-normal) var(--ease-default),
+              box-shadow var(--duration-normal) var(--ease-default),
+              padding var(--duration-normal) var(--ease-default),
+              top var(--duration-normal) var(--ease-default);
+}
+
+.navbar.is-scrolled {
+  background: var(--color-glass-bg);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border-color: var(--color-glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+.navbar.is-scrolled::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-green-transparent), transparent 40%, var(--color-gold-soft));
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.navbar.is-compact {
+  top: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-h4);
+  color: var(--color-green-primary);
+}
+
+.navbar__logo svg {
+  width: 28px; height: 28px;
+}
+
+.navbar__logo-mark path {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: logo-draw 1.6s var(--ease-default) 0.3s forwards;
+}
+
+@keyframes logo-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.navbar__link {
+  position: relative;
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  padding-block: var(--space-1);
+}
+
+.navbar__link::after {
+  /* indicador ativo em forma de patinha — desenhado via mask de SVG inline */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 10px; height: 10px;
+  transform: translateX(-50%) scale(0);
+  background: var(--color-green-hover);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='15' r='5'/%3E%3Ccircle cx='5' cy='8' r='2.6'/%3E%3Ccircle cx='19' cy='8' r='2.6'/%3E%3Ccircle cx='9' cy='4' r='2.2'/%3E%3Ccircle cx='15' cy='4' r='2.2'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.navbar__link.is-active::after,
+.navbar__link:hover::after {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Hover magnético — JS aplica translate via custom properties --mx/--my */
+.navbar__link {
+  transform: translate(var(--mx, 0), var(--my, 0));
+  transition: transform 0.25s var(--ease-default);
+}
+
+.navbar__cta-area {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.navbar__toggle {
+  display: none;
+  width: 40px; height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__toggle span {
+  position: relative;
+  width: 20px; height: 2px;
+  background: var(--color-green-primary);
+  transition: background var(--duration-fast);
+}
+.navbar__toggle span::before,
+.navbar__toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px; height: 2px;
+  background: var(--color-green-primary);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+.navbar__toggle span::before { top: -6px; }
+.navbar__toggle span::after { top: 6px; }
+
+@media (max-width: 860px) {
+  .navbar__links { display: none; }
+  .navbar__toggle { display: flex; }
+  .navbar { width: 90%; }
+}
+
+/* Menu mobile (drawer) */
+.navbar-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-navbar) - 1);
+  background: var(--color-surface-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+.navbar-mobile.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar-mobile__link {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--color-text-on-dark);
+}
+
+
+/* ===== css/components-ui.css ===== */
+/* ============================================================
+   COMPONENTE: CARD (base reutilizável)
+   Variantes específicas (serviço, depoimento, sobre) estendem
+   esta base e adicionam UM detalhe diferenciador cada uma,
+   conforme pedido no brief.
+   ============================================================ */
+
+.card {
+  position: relative;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-default),
+              box-shadow var(--duration-normal) var(--ease-default),
+              border-color var(--duration-normal) var(--ease-default);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card--glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border-color: var(--color-glass-border);
+}
+
+/* Card de serviço — usa --accent custom property por instância
+   para variar a cor de destaque sem duplicar CSS (cada serviço
+   recebe uma var(--accent) diferente inline no HTML) */
+.card--service {
+  --accent: var(--color-green-primary);
+  overflow: hidden;
+}
+
+.card--service::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-slow) var(--ease-default);
+}
+
+.card--service:hover::before { transform: scaleX(1); }
+
+.card--service:hover { border-color: var(--accent); }
+
+.card__icon {
+  width: 52px; height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  margin-bottom: var(--space-6);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.card--service:hover .card__icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.card__title {
+  font-size: var(--text-h4);
+  margin-bottom: var(--space-2);
+}
+
+.card__text {
+  font-size: var(--text-small);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+
+/* Card flutuante (seção Sobre) */
+.card--floating {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Card de estatística */
+.card--stat {
+  text-align: left;
+  padding: var(--space-6);
+}
+
+.card--stat .stat__number {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--color-green-primary);
+  line-height: 1;
+}
+
+.card--stat .stat__label {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-top: var(--space-1);
+}
+
+
+/* ============================================================
+   COMPONENTE: INPUT
+   ============================================================ */
+
+.field {
+  position: relative;
+  margin-bottom: var(--space-6);
+}
+
+.field__icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast);
+  pointer-events: none;
+}
+
+.field__input {
+  width: 100%;
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+  background: var(--color-surface-card);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  color: var(--color-text-primary);
+  transition: border-color var(--duration-normal) var(--ease-default),
+              box-shadow var(--duration-normal) var(--ease-default);
+}
+
+.field__input::placeholder { color: transparent; } /* placeholder real escondido — usamos label animado */
+
+.field__input:focus {
+  border-color: var(--color-green-hover);
+  box-shadow: 0 0 0 4px var(--color-green-transparent);
+}
+
+.field__input:focus + .field__icon,
+.field__input:not(:placeholder-shown) + .field__icon {
+  color: var(--color-green-hover);
+}
+
+.field__label {
+  position: absolute;
+  left: var(--space-12);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: transform var(--duration-normal) var(--ease-default),
+              font-size var(--duration-normal) var(--ease-default),
+              color var(--duration-normal) var(--ease-default);
+  background: var(--color-surface-card);
+  padding-inline: var(--space-1);
+}
+
+.field__input:focus + .field__icon + .field__label,
+.field__input:not(:placeholder-shown) + .field__icon + .field__label {
+  top: 0;
+  font-size: var(--text-caption);
+  color: var(--color-green-hover);
+  transform: translateY(-50%) translateX(-0.5rem);
+}
+
+.field__hint {
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.field.is-valid .field__input { border-color: var(--color-green-hover); }
+.field.is-valid .field__hint { color: var(--color-green-hover); }
+
+.field.is-error .field__input { border-color: #C1554A; }
+.field.is-error .field__hint { color: #C1554A; }
+
+.field__check {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  color: var(--color-green-hover);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+.field.is-valid .field__check { transform: translateY(-50%) scale(1); }
+
+textarea.field__input { resize: vertical; min-height: 120px; padding-top: var(--space-4); }
+textarea.field__input + .field__icon { top: var(--space-6); transform: none; }
+
+
+/* ============================================================
+   COMPONENTE: MODAL (usado pelo Lightbox da galeria)
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(8, 28, 21, 0.82);
+  backdrop-filter: var(--blur-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+.modal-overlay.is-open { opacity: 1; visibility: visible; }
+
+.modal {
+  position: relative;
+  max-width: min(90vw, 980px);
+  max-height: 85vh;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  transform: scale(0.9) translateY(20px);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.modal-overlay.is-open .modal { transform: scale(1) translateY(0); }
+
+.modal img { width: 100%; height: 100%; object-fit: cover; }
+
+.modal__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 40px; height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-glass-bg-dark);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: var(--blur-sm);
+  transition: transform var(--duration-fast) var(--ease-spring), background var(--duration-fast);
+}
+.modal__close:hover { transform: rotate(90deg); background: var(--color-green-hover); }
+
+.modal__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-glass-bg-dark);
+  color: var(--color-white);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: var(--blur-sm);
+  transition: background var(--duration-fast), transform var(--duration-fast) var(--ease-spring);
+}
+.modal__nav:hover { background: var(--color-green-hover); transform: translateY(-50%) scale(1.08); }
+.modal__nav--prev { left: var(--space-4); }
+.modal__nav--next { right: var(--space-4); }
+
+
+/* ============================================================
+   COMPONENTE: ACCORDION (FAQ)
+   ============================================================ */
+
+.accordion-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-item__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-6);
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+.accordion-item__icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--color-green-transparent);
+  color: var(--color-green-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--duration-normal) var(--ease-spring),
+              background var(--duration-normal) var(--ease-default);
+}
+
+.accordion-item.is-open .accordion-item__icon {
+  transform: rotate(135deg);
+  background: var(--color-green-primary);
+  color: var(--color-white);
+}
+
+.accordion-item__panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-slow) var(--ease-spring);
+}
+
+.accordion-item__panel-inner {
+  padding-bottom: var(--space-6);
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 640px;
+}
+
+
+/* ============================================================
+   COMPONENTE: TOOLTIP simples (usado em selos/estatísticas)
+   ============================================================ */
+
+.tooltip { position: relative; }
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--color-green-dark);
+  color: var(--color-white);
+  font-size: var(--text-caption);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast), transform var(--duration-fast);
+}
+.tooltip:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ===== css/loading-cursor.css ===== */
+/* ============================================================
+   LOADING SCREEN
+   Logo sendo desenhada > pegadas caminhando > barra de progresso
+   > blur/fade > revela o site
+   ============================================================ */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loading);
+  background: var(--color-surface-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  transition: opacity var(--duration-cinematic) var(--ease-default),
+              filter var(--duration-cinematic) var(--ease-default);
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.loader__logo {
+  width: 64px; height: 64px;
+  color: var(--color-green-glow);
+}
+
+.loader__logo path {
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  animation: loader-draw 1.8s var(--ease-default) forwards;
+}
+
+@keyframes loader-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.loader__paws {
+  display: flex;
+  gap: var(--space-3);
+  height: 20px;
+}
+
+.loader__paws span {
+  width: 10px; height: 10px;
+  opacity: 0;
+  background: var(--color-green-glow);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='15' r='5'/%3E%3Ccircle cx='5' cy='8' r='2.6'/%3E%3Ccircle cx='19' cy='8' r='2.6'/%3E%3Ccircle cx='9' cy='4' r='2.2'/%3E%3Ccircle cx='15' cy='4' r='2.2'/%3E%3C/svg%3E") center / contain no-repeat;
+  animation: loader-paw-step 1.2s var(--ease-default) infinite;
+}
+
+.loader__paws span:nth-child(1) { animation-delay: 0s; }
+.loader__paws span:nth-child(2) { animation-delay: 0.15s; }
+.loader__paws span:nth-child(3) { animation-delay: 0.3s; }
+.loader__paws span:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes loader-paw-step {
+  0%, 100% { opacity: 0; transform: translateY(4px); }
+  50% { opacity: 1; transform: translateY(0); }
+}
+
+.loader__progress {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.loader__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--color-green-glow);
+  box-shadow: var(--shadow-glow-green);
+  transition: width 0.3s var(--ease-default);
+}
+
+.loader__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-text-on-dark-muted);
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   CURSOR CUSTOMIZADO
+   Dois elementos: dot (ponto central) + ring (anel que segue
+   com leve atraso). Estado mudado via classes no <body>.
+   ============================================================ */
+
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  border-radius: var(--radius-full);
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--color-green-primary);
+  transition: opacity var(--duration-fast);
+}
+
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1.5px solid var(--color-green-primary);
+  transition: width var(--duration-normal) var(--ease-spring),
+              height var(--duration-normal) var(--ease-spring),
+              border-color var(--duration-normal) var(--ease-default),
+              background var(--duration-normal) var(--ease-default),
+              opacity var(--duration-fast);
+}
+
+/* Hover em botão -> patinha */
+body.cursor-paw .cursor-ring {
+  width: 0; height: 0; border: none;
+}
+body.cursor-paw .cursor-dot {
+  width: 22px; height: 22px;
+  background: transparent;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='15' r='5'/%3E%3Ccircle cx='5' cy='8' r='2.6'/%3E%3Ccircle cx='19' cy='8' r='2.6'/%3E%3Ccircle cx='9' cy='4' r='2.2'/%3E%3Ccircle cx='15' cy='4' r='2.2'/%3E%3C/svg%3E") center / contain no-repeat;
+  background-color: var(--color-green-primary);
+}
+
+/* Hover em imagem -> zoom (texto "+") */
+body.cursor-zoom .cursor-ring {
+  width: 56px; height: 56px;
+  background: var(--color-glass-bg-dark);
+  border-color: transparent;
+  backdrop-filter: var(--blur-sm);
+}
+body.cursor-zoom .cursor-dot { opacity: 0; }
+body.cursor-zoom .cursor-ring::after {
+  content: "+";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: 1.2rem;
+}
+
+/* Hover em card -> glow */
+body.cursor-glow .cursor-ring {
+  width: 70px; height: 70px;
+  border-color: var(--color-green-glow);
+  box-shadow: var(--shadow-glow-green);
+  background: transparent;
+}
+
+/* Hover em galeria -> "Visualizar" */
+body.cursor-view .cursor-ring {
+  width: 90px; height: 90px;
+  background: var(--color-glass-bg-dark);
+  border-color: transparent;
+  backdrop-filter: var(--blur-sm);
+}
+body.cursor-view .cursor-dot { opacity: 0; }
+body.cursor-view .cursor-ring::after {
+  content: "Visualizar";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-wide);
+  text-align: center;
+}
+
+/* Hover em CTA -> pulsação */
+body.cursor-pulse .cursor-ring {
+  border-color: var(--color-green-glow);
+  animation: cursor-pulse 1s var(--ease-default) infinite;
+}
+@keyframes cursor-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(116, 198, 157, 0.55); }
+  100% { box-shadow: 0 0 0 16px rgba(116, 198, 157, 0); }
+}
+
+
+/* ============================================================
+   PEGADAS DE SCROLL LATERAL (assinatura visual da página)
+   Trilha fixa na lateral; pegadas vão "caminhando" conforme
+   a página é rolada (JS atualiza --progress / revela via classe)
+   ============================================================ */
+
+.scroll-trail {
+  position: fixed;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-decorative);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+.scroll-trail.is-visible { opacity: 0.55; }
+
+.scroll-trail span {
+  width: 8px; height: 8px;
+  background: var(--color-green-secondary);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='15' r='5'/%3E%3Ccircle cx='5' cy='8' r='2.6'/%3E%3Ccircle cx='19' cy='8' r='2.6'/%3E%3Ccircle cx='9' cy='4' r='2.2'/%3E%3Ccircle cx='15' cy='4' r='2.2'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0.25;
+  transition: opacity var(--duration-normal) var(--ease-default),
+              transform var(--duration-normal) var(--ease-default);
+}
+
+.scroll-trail span.is-active {
+  opacity: 1;
+  transform: scale(1.3);
+  background: var(--color-green-glow);
+}
+
+@media (max-width: 860px) {
+  .scroll-trail { display: none; }
+}
+
+
+/* ===== css/hero.css ===== */
+/* ============================================================
+   HERO CINEMATOGRÁFICA
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--color-surface-dark);
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  overflow: hidden;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* zoom extremamente lento + leve translação, animado via GSAP (hero-zoom) */
+  transform: scale(1.08);
+  will-change: transform;
+}
+
+.hero__media::after {
+  /* vinheta + leitura de texto */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8,28,21,0.55) 0%, rgba(8,28,21,0.25) 35%, rgba(8,28,21,0.75) 100%),
+    radial-gradient(120% 80% at 15% 20%, rgba(8,28,21,0.15) 0%, rgba(8,28,21,0.7) 75%);
+}
+
+/* Reflexo de luz ambiente — elemento animado via GSAP (hero-light-sweep) */
+.hero__light {
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 140%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.10) 50%, transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: var(--z-decorative);
+}
+
+/* Floating shapes / leaves / paw prints — posicionados absolutamente,
+   animados via GSAP com movimento flutuante independente (timeline hero-float) */
+.hero__floaters {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-decorative);
+  pointer-events: none;
+}
+
+.floater {
+  position: absolute;
+  opacity: 0.35;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+  color: var(--color-green-glow);
+}
+
+.floater--leaf-1 { top: 18%; left: 8%;  width: 28px; }
+.floater--leaf-2 { top: 65%; left: 14%; width: 20px; }
+.floater--paw-1  { top: 30%; left: 85%; width: 22px; }
+.floater--paw-2  { top: 72%; left: 80%; width: 16px; }
+.floater--circle-blur {
+  top: 10%; right: 5%;
+  width: 280px; height: 280px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-glow);
+  filter: var(--blur-xl);
+  opacity: 0.5;
+}
+
+.hero__content {
+  position: relative;
+  z-index: var(--z-content);
+  width: 100%;
+}
+
+.hero__inner {
+  max-width: 760px;
+}
+
+.hero__badge {
+  margin-bottom: var(--space-6);
+}
+
+.hero__title {
+  color: var(--color-white);
+  margin-bottom: var(--space-6);
+}
+
+.hero__title .line {
+  display: block;
+  overflow: hidden; /* máscara para mask-reveal de texto */
+}
+
+.hero__title .line span {
+  display: block;
+  transform: translateY(110%);
+}
+
+.hero__subtitle {
+  font-size: var(--text-body);
+  color: var(--color-text-on-dark-muted);
+  max-width: 480px;
+  margin-bottom: var(--space-10);
+  line-height: var(--leading-relaxed);
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: var(--space-10);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-on-dark-muted);
+}
+
+.hero__scroll-cue span {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.hero__scroll-cue .scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--color-green-glow), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-cue .scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-green-glow);
+  animation: scroll-cue-drip 1.8s var(--ease-default) infinite;
+}
+
+@keyframes scroll-cue-drip {
+  to { top: 100%; }
+}
+
+@media (max-width: 640px) {
+  .hero { min-height: 92vh; }
+  .floater--circle-blur { width: 180px; height: 180px; }
+}
+
+
+/* ============================================================
+   ELEMENTOS DECORATIVOS GLOBAIS (reuso entre seções claras)
+   ============================================================ */
+
+.decor-blur {
+  position: absolute;
+  border-radius: var(--radius-full);
+  filter: var(--blur-xl);
+  z-index: var(--z-decorative);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.decor-blur--green { background: var(--gradient-glow); }
+.decor-blur--gold   { background: radial-gradient(circle, var(--color-gold-soft) 0%, transparent 70%); }
+
+.decor-leaf {
+  position: absolute;
+  color: var(--color-green-secondary);
+  opacity: 0.12;
+  z-index: var(--z-decorative);
+  pointer-events: none;
+}
+
+.decor-line {
+  /* linha orgânica decorativa — path SVG sutil entre seções */
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+  z-index: var(--z-decorative);
+  opacity: 0.5;
+  color: var(--color-border);
+}
+
+
+/* ===== css/sections.css ===== */
+/* ============================================================
+   SEÇÃO: SERVIÇOS
+   ============================================================ */
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-6);
+}
+
+
+/* ============================================================
+   SEÇÃO: SOBRE — composição sofisticada com imagem sobreposta
+   e cards flutuantes
+   ============================================================ */
+
+.about {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.about__visual {
+  position: relative;
+  height: clamp(420px, 50vw, 600px);
+}
+
+.about__img-main {
+  position: absolute;
+  top: 0; left: 0;
+  width: 78%;
+  height: 88%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.about__img-main img { width: 100%; height: 100%; object-fit: cover; }
+
+.about__img-secondary {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 48%;
+  height: 52%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 6px solid var(--color-surface-light);
+  box-shadow: var(--shadow-lg);
+}
+
+.about__img-secondary img { width: 100%; height: 100%; object-fit: cover; }
+
+.about__stat-card {
+  position: absolute;
+  top: var(--space-8);
+  right: -1.5rem;
+  background: var(--color-surface-card);
+  z-index: var(--z-content);
+}
+
+.about__badge-seal {
+  position: absolute;
+  bottom: var(--space-6);
+  left: -1rem;
+  width: 90px; height: 90px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-card);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: var(--z-content);
+  color: var(--color-green-primary);
+}
+
+.about__badge-seal strong { font-family: var(--font-display); font-size: var(--text-h4); display: block; }
+.about__badge-seal small { font-size: 0.6rem; letter-spacing: var(--tracking-wide); }
+
+.about__content .section-head { margin-bottom: var(--space-8); }
+
+.about__stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+}
+
+@media (max-width: 900px) {
+  .about { grid-template-columns: 1fr; gap: var(--space-12); }
+  .about__visual { max-width: 420px; margin-inline: auto; }
+  .about__stats-row { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   SEÇÃO: GALERIA — Pinterest-style masonry + lightbox
+   ============================================================ */
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 10px;
+  gap: var(--space-4);
+}
+
+.gallery__item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: none;
+}
+
+.gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-default),
+              filter var(--duration-slow) var(--ease-default);
+}
+
+.gallery__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(8,28,21,0.75) 100%);
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+.gallery__item:hover::after { opacity: 1; }
+.gallery__item:hover img { transform: scale(1.08); }
+
+.gallery__caption {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  right: var(--space-4);
+  color: var(--color-white);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--duration-normal) var(--ease-default),
+              transform var(--duration-normal) var(--ease-default);
+}
+
+.gallery__item:hover .gallery__caption { opacity: 1; transform: translateY(0); }
+
+/* Tamanhos variados estilo masonry (spans definidos por classe utilitária) */
+.gallery__item--tall   { grid-row: span 32; grid-column: span 1; }
+.gallery__item--short  { grid-row: span 20; grid-column: span 1; }
+.gallery__item--wide   { grid-row: span 24; grid-column: span 2; }
+.gallery__item--medium { grid-row: span 26; grid-column: span 1; }
+
+@media (max-width: 900px) {
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery__item--wide { grid-column: span 2; }
+}
+
+
+/* ============================================================
+   SEÇÃO: DEPOIMENTOS — carousel infinito com efeito coverflow
+   ============================================================ */
+
+.testimonials {
+  background: var(--color-surface-dark);
+  color: var(--color-text-on-dark);
+  overflow: hidden;
+}
+
+.testimonials .section-head p { color: var(--color-text-on-dark-muted); }
+.testimonials .section-head h2 { color: var(--color-text-on-dark); }
+
+.testimonial-track {
+  display: flex;
+  gap: var(--space-6);
+  padding-block: var(--space-8);
+  /* o JS clona itens para criar o loop infinito e anima via GSAP */
+}
+
+.testimonial-card {
+  flex: 0 0 auto;
+  width: clamp(280px, 32vw, 380px);
+  background: var(--color-glass-bg-dark);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: var(--blur-md);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: transform var(--duration-normal) var(--ease-default),
+              opacity var(--duration-normal) var(--ease-default),
+              box-shadow var(--duration-normal) var(--ease-default);
+  /* coverflow: escala/opacidade aplicadas via JS conforme distância do centro */
+}
+
+.testimonial-card.is-center {
+  box-shadow: var(--shadow-glow-green), var(--shadow-xl);
+  border-color: var(--color-green-glow);
+}
+
+.testimonial-card__quote {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-6);
+}
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.testimonial-card__author img {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.testimonial-card__author strong { display: block; font-size: var(--text-small); }
+.testimonial-card__author span { font-size: var(--text-caption); color: var(--color-text-on-dark-muted); }
+
+.testimonial-card__pet-badge {
+  margin-top: var(--space-4);
+  display: inline-flex;
+}
+
+
+/* ============================================================
+   SEÇÃO: FAQ
+   ============================================================ */
+
+.faq__list { max-width: var(--container-narrow); }
+
+
+/* ============================================================
+   SEÇÃO: CONTATO
+   ============================================================ */
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+}
+
+.contact__map {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  min-height: 420px;
+  box-shadow: var(--shadow-lg);
+  filter: grayscale(0.3) sepia(0.15);
+}
+
+.contact__map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(27,67,50,0.25), transparent 60%);
+  pointer-events: none;
+}
+
+.contact__map-pin {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -100%);
+  width: 36px; height: 36px;
+  color: var(--color-green-primary);
+  filter: drop-shadow(var(--shadow-md));
+  animation: pin-bounce 2.2s var(--ease-spring) infinite;
+}
+
+@keyframes pin-bounce {
+  0%, 100% { transform: translate(-50%, -100%); }
+  50% { transform: translate(-50%, -112%); }
+}
+
+.contact__info-list {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact__info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.contact__info-item .icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-green-transparent);
+  color: var(--color-green-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .contact { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  position: relative;
+  background: var(--color-surface-dark);
+  color: var(--color-text-on-dark);
+  overflow: hidden;
+  padding-top: var(--space-24);
+}
+
+.footer__wave {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  color: var(--color-surface-light);
+  line-height: 0;
+}
+
+.footer__decor-leaf {
+  position: absolute;
+  opacity: 0.06;
+  color: var(--color-green-glow);
+  pointer-events: none;
+}
+
+.footer__grid {
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--space-10);
+  padding-bottom: var(--space-16);
+}
+
+.footer__brand .navbar__logo { color: var(--color-text-on-dark); margin-bottom: var(--space-4); }
+
+.footer__tagline {
+  color: var(--color-text-on-dark-muted);
+  max-width: 280px;
+  font-size: var(--text-small);
+  line-height: var(--leading-relaxed);
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.footer__social a {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--duration-normal) var(--ease-spring),
+              background var(--duration-normal) var(--ease-default),
+              border-color var(--duration-normal) var(--ease-default);
+}
+
+.footer__social a:hover {
+  background: var(--color-green-hover);
+  border-color: var(--color-green-hover);
+  transform: translateY(-4px) rotate(-6deg);
+}
+
+.footer__col-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-green-glow);
+  margin-bottom: var(--space-5);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__links a {
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--text-small);
+  position: relative;
+  width: fit-content;
+}
+
+.footer__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 1px;
+  background: var(--color-green-glow);
+  transition: width var(--duration-normal) var(--ease-default);
+}
+
+.footer__links a:hover { color: var(--color-text-on-dark); }
+.footer__links a:hover::after { width: 100%; }
+
+.footer__bottom {
+  position: relative;
+  z-index: var(--z-content);
+  border-top: 1px solid var(--color-glass-border);
+  padding-block: var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--text-caption);
+  color: var(--color-text-on-dark-muted);
+}
+
+@media (max-width: 900px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+@media (max-width: 560px) {
+  .footer__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   WHATSAPP FLOATING CTA
+   ============================================================ */
+
+.whatsapp-fab {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-navbar);
+  width: 60px; height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--color-green-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  animation: fab-breathe 3s var(--ease-default) infinite;
+}
+
+.whatsapp-fab:hover {
+  background: var(--color-green-hover);
+  box-shadow: var(--shadow-glow-green), var(--shadow-lg);
+}
+
+@keyframes fab-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@media (max-width: 640px) {
+  .whatsapp-fab { width: 52px; height: 52px; bottom: var(--space-4); right: var(--space-4); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOADING SCREEN
+     ============================================================ -->
+<div class="loader">
+  <svg class="loader__logo" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+    <path d="M32 50c-9 0-16-5-16-13 0-6 4-10 9-10 3 0 5 2 5 5 0-3 2-5 5-5 5 0 9 4 9 10 0 8-7 13-16 13z"/>
+    <circle cx="20" cy="22" r="5"/>
+    <circle cx="44" cy="22" r="5"/>
+    <circle cx="14" cy="34" r="4"/>
+    <circle cx="50" cy="34" r="4"/>
+  </svg>
+  <div class="loader__paws" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="loader__progress"><div class="loader__progress-bar"></div></div>
+  <span class="loader__label">Preparando o cuidado</span>
+</div>
+
+<!-- Cursor customizado -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- Trilha de pegadas de scroll -->
+<div class="scroll-trail" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="navbar">
+  <a href="#home" class="navbar__logo">
+    <svg class="navbar__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19c-3.5 0-6-2-6-5 0-2.2 1.5-3.8 3.4-3.8 1.1 0 2 .8 2 2 0-1.2.9-2 2-2 1.9 0 3.4 1.6 3.4 3.8 0 3-2.5 5-6 5z"/>
+      <circle cx="7.5" cy="8" r="1.8"/>
+      <circle cx="16.5" cy="8" r="1.8"/>
+    </svg>
+    VetCare
+  </a>
+
+  <nav class="navbar__links">
+    <a href="#sobre" class="navbar__link">Sobre</a>
+    <a href="#servicos" class="navbar__link">Serviços</a>
+    <a href="#galeria" class="navbar__link">Galeria</a>
+    <a href="#depoimentos" class="navbar__link">Depoimentos</a>
+    <a href="#faq" class="navbar__link">FAQ</a>
+  </nav>
+
+  <div class="navbar__cta-area">
+    <a href="#contato" class="btn btn--primary btn--sm">
+      <span class="btn__paw">🐾</span>
+      <span class="btn__label">Agendar consulta</span>
+      <span class="btn__ripple"></span>
+      <span class="btn__particles"><span></span><span></span><span></span><span></span></span>
+    </a>
+    <button class="navbar__toggle" aria-label="Abrir menu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="navbar-mobile">
+  <a href="#sobre" class="navbar-mobile__link">Sobre</a>
+  <a href="#servicos" class="navbar-mobile__link">Serviços</a>
+  <a href="#galeria" class="navbar-mobile__link">Galeria</a>
+  <a href="#depoimentos" class="navbar-mobile__link">Depoimentos</a>
+  <a href="#faq" class="navbar-mobile__link">FAQ</a>
+  <a href="#contato" class="navbar-mobile__link">Contato</a>
+</div>
+
+<main>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero__media">
+    <!-- TODO: substituir por assets/hero/hero.png quando o arquivo for enviado -->
+    <img src="./hero.png" alt="Pet recebendo cuidado veterinário em ambiente acolhedor">
+  </div>
+  <div class="hero__light" aria-hidden="true"></div>
+
+  <div class="hero__floaters" aria-hidden="true">
+    <svg class="floater floater--leaf-1" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C17 8 18 17 11 21C11 21 3 18 5 9C7 1 17 8 17 8Z"/></svg>
+    <svg class="floater floater--leaf-2" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C17 8 18 17 11 21C11 21 3 18 5 9C7 1 17 8 17 8Z"/></svg>
+    <svg class="floater floater--paw-1" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="15" r="5"/><circle cx="5" cy="8" r="2.6"/><circle cx="19" cy="8" r="2.6"/><circle cx="9" cy="4" r="2.2"/><circle cx="15" cy="4" r="2.2"/></svg>
+    <svg class="floater floater--paw-2" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="15" r="5"/><circle cx="5" cy="8" r="2.6"/><circle cx="19" cy="8" r="2.6"/><circle cx="9" cy="4" r="2.2"/><circle cx="15" cy="4" r="2.2"/></svg>
+    <div class="floater--circle-blur"></div>
+  </div>
+
+  <div class="hero__content container">
+    <div class="hero__inner">
+      <div class="hero__badge badge badge--on-dark" style="opacity:0; transform: translateY(12px);">
+        <span class="badge__dot"></span> Cuidado veterinário desde 2010
+      </div>
+
+      <h1 class="hero__title text-hero">
+        <span class="line"><span>Cuidado que</span></span>
+        <span class="line"><span>parece carinho,</span></span>
+        <span class="line"><span>não procedimento.</span></span>
+      </h1>
+
+      <p class="hero__subtitle" style="opacity:0; transform: translateY(12px);">
+        Medicina veterinária de alto padrão em Curitiba — diagnóstico preciso, tecnologia avançada e uma equipe que trata cada pet como gostaria que o seu fosse tratado.
+      </p>
+
+      <div class="hero__actions" style="opacity:0; transform: translateY(12px);">
+        <a href="#contato" class="btn btn--primary btn--lg">
+          <span class="btn__paw">🐾</span>
+          <span class="btn__label">Agendar consulta</span>
+          <span class="btn__ripple"></span>
+          <span class="btn__particles"><span></span><span></span><span></span><span></span></span>
+        </a>
+        <a href="#servicos" class="btn btn--on-dark btn--lg">
+          <span class="btn__label">Conhecer serviços</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll-cue" style="opacity:0;">
+    <span>Role para explorar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVIÇOS
+     ============================================================ -->
+<section class="section" id="servicos">
+  <div class="container">
+    <div class="section-head" data-reveal="fade-up">
+      <span class="eyebrow">Especialidades</span>
+      <h2>Cuidado completo, em cada fase da vida do seu pet</h2>
+      <p>Da prevenção à urgência, cada atendimento combina precisão clínica com a gentileza que todo animal merece.</p>
+    </div>
+
+    <div class="services__grid" data-reveal-group>
+      <div class="card card--service" style="--accent:#2D6A4F;">
+        <div class="card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9-9c-1.5-3.5 1-7 4.5-7 2 0 3.5 1.2 4.5 2.8C13 6.2 14.5 5 16.5 5 20 5 22.5 8.5 21 12c-2 4.5-9 9-9 9z"/></svg>
+        </div>
+        <h3 class="card__title">Clínica geral</h3>
+        <p class="card__text">Consultas completas com avaliação clínica detalhada e acompanhamento contínuo da saúde do seu pet.</p>
+      </div>
+
+      <div class="card card--service" style="--accent:#C9A961;">
+        <div class="card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v4M15 3v4M4 9h16M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/><path d="M9 14h6M9 17h4"/></svg>
+        </div>
+        <h3 class="card__title">Exames e diagnóstico</h3>
+        <p class="card__text">Equipamentos modernos para diagnósticos rápidos e precisos, com laudos no mesmo dia.</p>
+      </div>
+
+      <div class="card card--service" style="--accent:#40916C;">
+        <div class="card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="9" rx="2"/><path d="M7 11V8a5 5 0 0 1 10 0v3"/></svg>
+        </div>
+        <h3 class="card__title">Cirurgias</h3>
+        <p class="card__text">Procedimentos cirúrgicos com protocolo de segurança rigoroso e recuperação acompanhada de perto.</p>
+      </div>
+
+      <div class="card card--service" style="--accent:#8A6D2F;">
+        <div class="card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.5-1 2-3 1-4.5-1-1.6-3-2-4.5-1-1-2-3.5-2.5-5-1-1.5-1.5-4-1-5 1-1.5 1.5-1 3.5 1 4.5"/><path d="M12 21c-3-2-7-5-7-9"/></svg>
+        </div>
+        <h3 class="card__title">Banho e estética</h3>
+        <p class="card__text">Tosa e banho com produtos hipoalergênicos, pensados para o conforto e a pele de cada animal.</p>
+      </div>
+
+      <div class="card card--service" style="--accent:#1B4332;">
+        <div class="card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1z"/></svg>
+        </div>
+        <h3 class="card__title">Odontologia</h3>
+        <p class="card__text">Profilaxia e tratamento odontológico para prevenir dores e problemas silenciosos de saúde.</p>
+      </div>
+
+      <div class="card card--service" style="--accent:#74C69D;">
+        <div class="card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <h3 class="card__title">Urgência 24h</h3>
+        <p class="card__text">Atendimento de emergência a qualquer hora, com equipe preparada para os momentos que não podem esperar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE
+     ============================================================ -->
+<section class="section" id="sobre" style="background: var(--color-surface-accent);">
+  <div class="container">
+    <div class="about">
+      <div class="about__visual" data-reveal="fade">
+        <div class="about__img-main">
+          <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=900&q=80" alt="Veterinária examinando cachorro com cuidado">
+        </div>
+        <div class="about__img-secondary">
+          <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500&q=80" alt="Gato sendo acolhido na clínica">
+        </div>
+
+        <div class="card card--floating card--stat about__stat-card">
+          <div class="stat__number">14</div>
+          <div class="stat__label">Anos de experiência</div>
+        </div>
+
+        <div class="about__badge-seal tooltip" data-tooltip="Avaliação média dos tutores">
+          <strong>4.9</strong>
+          <small>★ Avaliação</small>
+        </div>
+      </div>
+
+      <div class="about__content">
+        <div class="section-head">
+          <span class="eyebrow">Quem cuida</span>
+          <h2>Tecnologia veterinária com alma de quem ama animais</h2>
+          <p>Unimos equipamentos de diagnóstico avançado a uma equipe que entende que, do outro lado da consulta, existe um tutor preocupado e um pet que confia em nós. Cada decisão clínica é tomada com rigor — e cada atendimento, com presença.</p>
+        </div>
+
+        <div class="about__stats-row">
+          <div class="card card--stat">
+            <div class="stat__number">12k+</div>
+            <div class="stat__label">Pets atendidos</div>
+          </div>
+          <div class="card card--stat">
+            <div class="stat__number">98%</div>
+            <div class="stat__label">Satisfação</div>
+          </div>
+          <div class="card card--stat">
+            <div class="stat__number">24h</div>
+            <div class="stat__label">Urgência</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALERIA
+     ============================================================ -->
+<section class="section" id="galeria">
+  <div class="container">
+    <div class="section-head" data-reveal="fade-up">
+      <span class="eyebrow">Nosso espaço</span>
+      <h2>Um ambiente pensado para acolher</h2>
+      <p>Cada espaço da clínica foi desenhado para reduzir o estresse do pet e transmitir confiança ao tutor.</p>
+    </div>
+
+    <div class="gallery__grid" data-reveal="fade">
+      <div class="gallery__item gallery__item--tall">
+        <img src="./recep.png" alt="Recepção da clínica">
+        <span class="gallery__caption">Recepção</span>
+      </div>
+      <div class="gallery__item gallery__item--short">
+        <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=600&q=80" alt="Sala de consulta">
+        <span class="gallery__caption">Sala de consulta</span>
+      </div>
+      <div class="gallery__item gallery__item--wide">
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=80" alt="Equipamento de diagnóstico por imagem">
+        <span class="gallery__caption">Diagnóstico por imagem</span>
+      </div>
+      <div class="gallery__item gallery__item--medium">
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&q=80" alt="Centro cirúrgico">
+        <span class="gallery__caption">Centro cirúrgico</span>
+      </div>
+      <div class="gallery__item gallery__item--short">
+        <img src="https://images.unsplash.com/photo-1581888227599-779811939961?w=600&q=80" alt="Área de banho e tosa">
+        <span class="gallery__caption">Banho e tosa</span>
+      </div>
+      <div class="gallery__item gallery__item--tall">
+        <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=600&q=80" alt="Internação para acompanhamento">
+        <span class="gallery__caption">Internação</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEPOIMENTOS
+     ============================================================ -->
+<section class="section testimonials" id="depoimentos">
+  <div class="container">
+    <div class="section-head" data-reveal="fade-up">
+      <span class="eyebrow">Tutores satisfeitos</span>
+      <h2>Histórias de quem confia o seu pet a nós</h2>
+    </div>
+  </div>
+
+  <div class="testimonial-track">
+    <div class="testimonial-card">
+      <p class="testimonial-card__quote">"Levei minha gata em pânico e saí com ela tranquila. Trataram como se fosse a única paciente do dia."</p>
+      <div class="testimonial-card__author">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Tutora Camila R.">
+        <div><strong>Camila R.</strong><span>Tutora da Mel</span></div>
+      </div>
+      <span class="testimonial-card__pet-badge badge">🐱 Felino</span>
+    </div>
+
+    <div class="testimonial-card">
+      <p class="testimonial-card__quote">"Diagnóstico rápido, explicação clara, sem aquela sensação de estar sendo só mais um atendimento."</p>
+      <div class="testimonial-card__author">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Tutor Bruno A.">
+        <div><strong>Bruno A.</strong><span>Tutor do Thor</span></div>
+      </div>
+      <span class="testimonial-card__pet-badge badge">🐶 Canino</span>
+    </div>
+
+    <div class="testimonial-card">
+      <p class="testimonial-card__quote">"A estrutura impressiona, mas o que me fez voltar foi o cuidado humano da equipe com o meu idoso de 14 anos."</p>
+      <div class="testimonial-card__author">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Tutora Renata S.">
+        <div><strong>Renata S.</strong><span>Tutora do Bidu</span></div>
+      </div>
+      <span class="testimonial-card__pet-badge badge">🐶 Canino</span>
+    </div>
+
+    <div class="testimonial-card">
+      <p class="testimonial-card__quote">"Urgência às 23h e fui recebida na hora. Isso não tem preço quando é o seu animal que está sofrendo."</p>
+      <div class="testimonial-card__author">
+        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=100&q=80" alt="Tutora Juliana M.">
+        <div><strong>Juliana M.</strong><span>Tutora da Nina</span></div>
+      </div>
+      <span class="testimonial-card__pet-badge badge">🐱 Felino</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head" data-reveal="fade-up">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2>Tudo o que você precisa saber antes de agendar</h2>
+    </div>
+
+    <div class="faq__list">
+      <div class="accordion-item">
+        <button class="accordion-item__header">
+          Preciso agendar com antecedência?
+          <span class="accordion-item__icon">+</span>
+        </button>
+        <div class="accordion-item__panel">
+          <div class="accordion-item__panel-inner">Para consultas de rotina, recomendamos agendar com 1 a 2 dias de antecedência. Para urgências, o atendimento é imediato, sem necessidade de agendamento.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-item__header">
+          Vocês atendem outros animais além de cães e gatos?
+          <span class="accordion-item__icon">+</span>
+        </button>
+        <div class="accordion-item__panel">
+          <div class="accordion-item__panel-inner">Sim, também atendemos pets de pequeno porte como aves e roedores. Em caso de dúvida sobre o seu animal, fale com a nossa equipe pelo WhatsApp antes de agendar.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-item__header">
+          Como funciona o atendimento de urgência 24h?
+          <span class="accordion-item__icon">+</span>
+        </button>
+        <div class="accordion-item__panel">
+          <div class="accordion-item__panel-inner">Nossa equipe de plantão está disponível todos os dias, inclusive feriados. Basta chegar à clínica ou nos chamar pelo WhatsApp para orientação imediata.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-item__header">
+          Quais formas de pagamento são aceitas?
+          <span class="accordion-item__icon">+</span>
+        </button>
+        <div class="accordion-item__panel">
+          <div class="accordion-item__panel-inner">Aceitamos cartão de crédito, débito, Pix e dinheiro. Também trabalhamos com parcelamento para procedimentos de maior valor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTATO
+     ============================================================ -->
+<section class="section" id="contato" style="background: var(--color-surface-accent);">
+  <div class="container">
+    <div class="section-head" data-reveal="fade-up">
+      <span class="eyebrow">Fale com a gente</span>
+      <h2>Agende uma consulta para o seu pet</h2>
+      <p>Responda ao formulário ou fale diretamente pelo WhatsApp — geralmente respondemos em poucos minutos.</p>
+    </div>
+
+    <div class="contact">
+      <div data-reveal="slide-right">
+        <form class="contact-form">
+          <div class="field">
+            <input class="field__input" type="text" name="nome" id="nome" placeholder=" " required>
+            <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            <label class="field__label" for="nome">Seu nome</label>
+            <span class="field__check">✓</span>
+          </div>
+
+          <div class="field">
+            <input class="field__input" type="tel" name="telefone" id="telefone" placeholder=" " required>
+            <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+            <label class="field__label" for="telefone">WhatsApp</label>
+            <span class="field__check">✓</span>
+          </div>
+
+          <div class="field">
+            <input class="field__input" type="text" name="pet" id="pet" placeholder=" ">
+            <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="15" r="5"/><circle cx="5" cy="8" r="2.6"/><circle cx="19" cy="8" r="2.6"/></svg>
+            <label class="field__label" for="pet">Nome do pet</label>
+            <span class="field__check">✓</span>
+          </div>
+
+          <div class="field">
+            <textarea class="field__input" name="mensagem" id="mensagem" rows="4" placeholder=" "></textarea>
+            <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <label class="field__label" for="mensagem">O que aconteceu / motivo da consulta</label>
+            <span class="field__check">✓</span>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg" style="width:100%;" data-cursor="pulse">
+            <span class="btn__paw">🐾</span>
+            <span class="btn__label">Enviar pelo WhatsApp</span>
+            <span class="btn__ripple"></span>
+            <span class="btn__particles"><span></span><span></span><span></span><span></span></span>
+          </button>
+        </form>
+      </div>
+
+      <div data-reveal="slide-left">
+        <div class="contact__map">
+          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=900&q=80" alt="Mapa da região de Curitiba/Pinhais" style="width:100%;height:100%;object-fit:cover;">
+          <svg class="contact__map-pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.5 2 4 5.5 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.5-3.5-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+        </div>
+
+        <div class="contact__info-list">
+          <div class="contact__info-item">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+            <span>(41) 99999-9999</span>
+          </div>
+          <div class="contact__info-item">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+            <span>contato@vetcare.com.br</span>
+          </div>
+          <div class="contact__info-item">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C7.5 2 4 5.5 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.5-3.5-8-8-8z"/></svg></span>
+            <span>Curitiba / Pinhais — PR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <svg class="footer__wave" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="currentColor">
+    <path d="M0 40C240 0 480 80 720 40C960 0 1200 80 1440 40V0H0V40Z"/>
+  </svg>
+
+  <svg class="footer__decor-leaf" style="top:10%; left:5%; width:120px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C17 8 18 17 11 21C11 21 3 18 5 9C7 1 17 8 17 8Z"/></svg>
+  <svg class="footer__decor-leaf" style="bottom:10%; right:8%; width:90px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C17 8 18 17 11 21C11 21 3 18 5 9C7 1 17 8 17 8Z"/></svg>
+
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="#home" class="navbar__logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19c-3.5 0-6-2-6-5 0-2.2 1.5-3.8 3.4-3.8 1.1 0 2 .8 2 2 0-1.2.9-2 2-2 1.9 0 3.4 1.6 3.4 3.8 0 3-2.5 5-6 5z"/><circle cx="7.5" cy="8" r="1.8"/><circle cx="16.5" cy="8" r="1.8"/></svg>
+        VetCare
+      </a>
+      <p class="footer__tagline">Cuidado veterinário com a tecnologia de uma clínica premium e o carinho de quem entende de pets.</p>
+      <div class="footer__social">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer__col-title">Navegação</div>
+      <div class="footer__links">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#depoimentos">Depoimentos</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer__col-title">Serviços</div>
+      <div class="footer__links">
+        <a href="#servicos">Clínica geral</a>
+        <a href="#servicos">Exames</a>
+        <a href="#servicos">Cirurgias</a>
+        <a href="#servicos">Urgência 24h</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer__col-title">Contato</div>
+      <div class="footer__links">
+        <a href="tel:+5541999999999">(41) 99999-9999</a>
+        <a href="mailto:contato@vetcare.com.br">contato@vetcare.com.br</a>
+        <a href="#contato">Curitiba / Pinhais — PR</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© 2026 VetCare. Todos os direitos reservados.</span>
+    <span>Feito com cuidado, como tudo aqui.</span>
+  </div>
+</footer>
+
+<!-- ============================================================
+     LIGHTBOX MODAL (galeria)
+     ============================================================ -->
+<div class="modal-overlay">
+  <div class="modal">
+    <img src="" alt="">
+  </div>
+  <button class="modal__close" aria-label="Fechar">✕</button>
+  <button class="modal__nav modal__nav--prev" aria-label="Anterior">‹</button>
+  <button class="modal__nav modal__nav--next" aria-label="Próxima">›</button>
+</div>
+
+<!-- ============================================================
+     WHATSAPP FLOATING CTA
+     ============================================================ -->
+<a href="https://wa.me/5541999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta." target="_blank" class="whatsapp-fab" aria-label="Falar no WhatsApp" data-cursor="pulse">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.41 5.09L2 22l5.25-1.5a9.8 9.8 0 0 0 4.79 1.23h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.06h-.01a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.07.88.89-2.99-.2-.31a8.1 8.1 0 0 1-1.24-4.42c0-4.49 3.66-8.15 8.16-8.15a8.1 8.1 0 0 1 8.14 8.15c0 4.5-3.66 8.15-8.24 8.15zm4.47-6.11c-.24-.12-1.45-.71-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.78.96-.14.16-.29.18-.53.06-1.44-.72-2.38-1.28-3.33-2.91-.25-.43.25-.4.71-1.32.08-.16.04-.3-.03-.43-.08-.12-.59-1.42-.81-1.94-.21-.51-.43-.44-.59-.45-.15-.01-.32-.01-.5-.01-.16 0-.43.06-.66.31-.22.25-.86.84-.86 2.04 0 1.2.87 2.36 1 2.52.12.16 1.67 2.55 4.06 3.47 2.39.93 2.39.62 2.83.58.43-.04 1.45-.59 1.65-1.16.21-.57.21-1.05.15-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ===== js/loader-nav.js ===== */
+/* ============================================================
+   LOADER.JS — barra de progresso simulada + revelação do site
+   ============================================================ */
+
+(function () {
+  const loader = document.querySelector('.loader');
+  const bar = document.querySelector('.loader__progress-bar');
+  if (!loader || !bar) return;
+
+  let progress = 0;
+  const minDuration = 1400; // ms — tempo mínimo para a animação ser percebida
+  const start = performance.now();
+
+  function step() {
+    progress += Math.random() * 12;
+    if (progress > 96) progress = 96;
+    bar.style.width = progress + '%';
+
+    const elapsed = performance.now() - start;
+    const pageReady = document.readyState === 'complete';
+
+    if (progress >= 96 && pageReady && elapsed >= minDuration) {
+      bar.style.width = '100%';
+      setTimeout(() => {
+        loader.classList.add('is-hidden');
+        document.body.classList.remove('is-loading-lock');
+        window.dispatchEvent(new CustomEvent('site:revealed'));
+        setTimeout(() => loader.remove(), 1300);
+      }, 250);
+      return;
+    }
+    setTimeout(step, 180 + Math.random() * 180);
+  }
+
+  document.body.classList.add('is-loading-lock');
+  step();
+})();
+
+
+/* ============================================================
+   NAVBAR.JS — estados de scroll, menu mobile, hover magnético
+   ============================================================ */
+
+(function () {
+  const navbar = document.querySelector('.navbar');
+  const toggle = document.querySelector('.navbar__toggle');
+  const mobileMenu = document.querySelector('.navbar-mobile');
+  if (!navbar) return;
+
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    navbar.classList.toggle('is-scrolled', y > 40);
+    navbar.classList.toggle('is-compact', y > 200 && y > lastScroll);
+    lastScroll = y;
+  }, { passive: true });
+
+  if (toggle && mobileMenu) {
+    toggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+      document.body.classList.toggle('no-scroll', mobileMenu.classList.contains('is-open'));
+    });
+    mobileMenu.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+        document.body.classList.remove('no-scroll');
+      })
+    );
+  }
+
+  // hover magnético nos links
+  document.querySelectorAll('.navbar__link').forEach((link) => {
+    link.addEventListener('mousemove', (e) => {
+      const rect = link.getBoundingClientRect();
+      const mx = (e.clientX - rect.left - rect.width / 2) * 0.25;
+      const my = (e.clientY - rect.top - rect.height / 2) * 0.25;
+      link.style.setProperty('--mx', `${mx}px`);
+      link.style.setProperty('--my', `${my}px`);
+    });
+    link.addEventListener('mouseleave', () => {
+      link.style.setProperty('--mx', '0px');
+      link.style.setProperty('--my', '0px');
+    });
+  });
+
+  // indicador ativo conforme seção visível
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.navbar__link');
+  if (sections.length && navLinks.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((l) => l.classList.remove('is-active'));
+            const active = document.querySelector(`.navbar__link[href="#${entry.target.id}"]`);
+            if (active) active.classList.add('is-active');
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px' }
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+})();
+
+
+/* ============================================================
+   SCROLL-TRAIL.JS — trilha de pegadas que acompanha o scroll
+   ============================================================ */
+
+(function () {
+  const trail = document.querySelector('.scroll-trail');
+  if (!trail) return;
+  const dots = trail.querySelectorAll('span');
+
+  function update() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+
+    trail.classList.toggle('is-visible', scrollTop > 80);
+
+    const activeIndex = Math.floor(progress * dots.length);
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === activeIndex));
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+
+/* ===== js/cursor.js ===== */
+/* ============================================================
+   CURSOR.JS — cursor customizado com estados contextuais
+   ============================================================ */
+
+(function () {
+  const isTouch = window.matchMedia('(hover: none)').matches || window.innerWidth < 900;
+  if (isTouch) return;
+
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if (!dot || !ring) return;
+
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  });
+
+  // anel com leve atraso (easing manual via rAF) para sensação fluida
+  function tick() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  const stateMap = [
+    { selector: 'button, .btn, a.navbar__link, .navbar__toggle', cls: 'cursor-paw' },
+    { selector: '.hero__media img, .about__img-main img, .about__img-secondary img', cls: 'cursor-zoom' },
+    { selector: '.card', cls: 'cursor-glow' },
+    { selector: '.gallery__item', cls: 'cursor-view' },
+    { selector: '.whatsapp-fab, .cta-block, [data-cursor="pulse"]', cls: 'cursor-pulse' },
+  ];
+
+  const allClasses = stateMap.map((s) => s.cls);
+
+  stateMap.forEach(({ selector, cls }) => {
+    document.querySelectorAll(selector).forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        document.body.classList.remove(...allClasses);
+        document.body.classList.add(cls);
+      });
+      el.addEventListener('mouseleave', () => {
+        document.body.classList.remove(cls);
+      });
+    });
+  });
+
+  // esconder cursor ao saber do viewport
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity = '1';
+    ring.style.opacity = '1';
+  });
+})();
+
+
+/* ===== js/gallery-form.js ===== */
+/* ============================================================
+   GALLERY.JS — lightbox modal para a galeria estilo Pinterest
+   ============================================================ */
+
+(function () {
+  const items = Array.from(document.querySelectorAll('.gallery__item'));
+  const overlay = document.querySelector('.modal-overlay');
+  if (!items.length || !overlay) return;
+
+  const modalImg = overlay.querySelector('.modal img');
+  const btnClose = overlay.querySelector('.modal__close');
+  const btnPrev = overlay.querySelector('.modal__nav--prev');
+  const btnNext = overlay.querySelector('.modal__nav--next');
+
+  let current = 0;
+
+  function open(index) {
+    current = index;
+    const img = items[current].querySelector('img');
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    overlay.classList.add('is-open');
+    document.body.classList.add('no-scroll');
+  }
+
+  function close() {
+    overlay.classList.remove('is-open');
+    document.body.classList.remove('no-scroll');
+  }
+
+  function go(delta) {
+    current = (current + delta + items.length) % items.length;
+    const img = items[current].querySelector('img');
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+  }
+
+  items.forEach((item, i) => item.addEventListener('click', () => open(i)));
+  btnClose && btnClose.addEventListener('click', close);
+  btnPrev && btnPrev.addEventListener('click', () => go(-1));
+  btnNext && btnNext.addEventListener('click', () => go(1));
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+})();
+
+
+/* ============================================================
+   ACCORDION.JS — FAQ com abertura elástica
+   ============================================================ */
+
+(function () {
+  const items = document.querySelectorAll('.accordion-item');
+  items.forEach((item) => {
+    const header = item.querySelector('.accordion-item__header');
+    const panel = item.querySelector('.accordion-item__panel');
+    if (!header || !panel) return;
+
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+
+      items.forEach((other) => {
+        other.classList.remove('is-open');
+        other.querySelector('.accordion-item__panel').style.maxHeight = null;
+      });
+
+      if (!isOpen) {
+        item.classList.add('is-open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+
+
+/* ============================================================
+   FORM.JS — validação com feedback visual (sem submit real;
+   redireciona para WhatsApp com a mensagem preenchida)
+   ============================================================ */
+
+(function () {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
+
+  const WHATSAPP_NUMBER = '5541999999999'; // placeholder — substituir pelo número real
+
+  function validateField(field) {
+    const input = field.querySelector('.field__input');
+    if (!input) return true;
+    const value = input.value.trim();
+    let valid = true;
+
+    if (input.hasAttribute('required') && !value) valid = false;
+    if (input.type === 'email' && value) {
+      valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+    if (input.type === 'tel' && value) {
+      valid = value.replace(/\D/g, '').length >= 10;
+    }
+
+    field.classList.toggle('is-valid', valid && value.length > 0);
+    field.classList.toggle('is-error', !valid);
+    return valid;
+  }
+
+  form.querySelectorAll('.field').forEach((field) => {
+    const input = field.querySelector('.field__input');
+    if (input) input.addEventListener('blur', () => validateField(field));
+    if (input) input.addEventListener('input', () => {
+      if (field.classList.contains('is-error')) validateField(field);
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fields = Array.from(form.querySelectorAll('.field'));
+    const allValid = fields.map(validateField).every(Boolean);
+    if (!allValid) return;
+
+    const data = new FormData(form);
+    const nome = data.get('nome') || '';
+    const telefone = data.get('telefone') || '';
+    const pet = data.get('pet') || '';
+    const mensagem = data.get('mensagem') || '';
+
+    const text = encodeURIComponent(
+      `Olá! Meu nome é ${nome}.\nTelefone: ${telefone}\nPet: ${pet}\nMensagem: ${mensagem}`
+    );
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+  });
+})();
+
+
+/* ===== js/animations.js ===== */
+/* ============================================================
+   ANIMATIONS.JS — GSAP + ScrollTrigger
+   Orquestra: hero cinemático, reveals por seção, parallax,
+   coverflow de depoimentos.
+   ============================================================ */
+
+(function () {
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-reveal], .hero__title .line span').forEach((el) => {
+      el.style.transform = 'none';
+      el.style.opacity = '1';
+    });
+    return;
+  }
+
+  function initHero() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const tl = gsap.timeline({ delay: 0.2 });
+
+    tl.to('.hero__media img', {
+      scale: 1, duration: 2.4, ease: 'power2.out',
+    });
+
+    tl.to('.hero__title .line span', {
+      y: '0%', duration: 1, ease: 'power4.out', stagger: 0.12,
+    }, 0.3);
+
+    tl.to('.hero__subtitle, .hero__actions, .hero__badge', {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1,
+    }, 0.8);
+
+    tl.to('.hero__scroll-cue', { opacity: 1, duration: 0.6 }, 1.4);
+
+    // zoom lento contínuo de câmera + parallax no scroll
+    gsap.to('.hero__media img', {
+      yPercent: 8,
+      ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+    });
+
+    // reflexo de luz ambiente atravessando o hero
+    gsap.to('.hero__light', {
+      x: '140%', duration: 7, repeat: -1, ease: 'sine.inOut', repeatDelay: 2,
+    });
+
+    // floating shapes — movimento independente e contínuo
+    gsap.utils.toArray('.floater').forEach((el, i) => {
+      gsap.to(el, {
+        y: '+=18', x: i % 2 === 0 ? '+=8' : '-=8',
+        duration: 3.5 + i * 0.4,
+        repeat: -1, yoyo: true, ease: 'sine.inOut',
+      });
+    });
+  }
+
+  function initScrollReveals() {
+    gsap.utils.toArray('[data-reveal]').forEach((el) => {
+      const type = el.dataset.reveal || 'fade-up';
+      const config = {
+        'fade-up':    { y: 40, opacity: 0 },
+        'fade':       { opacity: 0 },
+        'scale':      { scale: 0.92, opacity: 0 },
+        'slide-left': { x: 60, opacity: 0 },
+        'slide-right':{ x: -60, opacity: 0 },
+      }[type] || { y: 40, opacity: 0 };
+
+      gsap.from(el, {
+        ...config,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+      });
+    });
+
+    // stagger automático para grids de cards
+    document.querySelectorAll('[data-reveal-group]').forEach((group) => {
+      const children = group.children;
+      gsap.from(children, {
+        y: 32, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12,
+        scrollTrigger: { trigger: group, start: 'top 85%' },
+      });
+    });
+  }
+
+  function initParallaxBlocks() {
+    document.querySelectorAll('[data-parallax]').forEach((el) => {
+      const speed = parseFloat(el.dataset.parallax) || 0.15;
+      gsap.to(el, {
+        yPercent: speed * 100,
+        ease: 'none',
+        scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
+    });
+  }
+
+  function initAboutComposition() {
+    const about = document.querySelector('.about__visual');
+    if (!about) return;
+    gsap.from('.about__img-main', { clipPath: 'inset(0 100% 0 0)', duration: 1.2, ease: 'power4.inOut',
+      scrollTrigger: { trigger: about, start: 'top 75%' } });
+    gsap.from('.about__img-secondary', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.3,
+      scrollTrigger: { trigger: about, start: 'top 75%' } });
+    gsap.from(['.about__stat-card', '.about__badge-seal'], { scale: 0.7, opacity: 0, duration: 0.7,
+      ease: 'back.out(1.7)', stagger: 0.15, delay: 0.6,
+      scrollTrigger: { trigger: about, start: 'top 75%' } });
+  }
+
+  function initTestimonialCoverflow() {
+    const track = document.querySelector('.testimonial-track');
+    if (!track) return;
+    const cards = Array.from(track.children);
+    if (!cards.length) return;
+
+    // clona para loop infinito
+    cards.forEach((c) => track.appendChild(c.cloneNode(true)));
+
+    let speed = 0.5;
+    let x = 0;
+    const cardWidth = cards[0].offsetWidth + 24;
+    const totalWidth = cardWidth * cards.length;
+
+    track.addEventListener('mouseenter', () => (speed = 0.08));
+    track.addEventListener('mouseleave', () => (speed = 0.5));
+
+    function loop() {
+      x -= speed;
+      if (Math.abs(x) >= totalWidth) x = 0;
+      track.style.transform = `translateX(${x}px)`;
+
+      // efeito coverflow: escala conforme proximidade do centro da viewport
+      const center = window.innerWidth / 2;
+      track.querySelectorAll('.testimonial-card').forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(center - cardCenter);
+        const scale = Math.max(0.85, 1 - dist / 1400);
+        const opacity = Math.max(0.5, 1 - dist / 900);
+        card.style.transform = `scale(${scale})`;
+        card.style.opacity = opacity;
+        card.classList.toggle('is-center', dist < 140);
+      });
+
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+  function init() {
+    initHero();
+    initScrollReveals();
+    initParallaxBlocks();
+    initAboutComposition();
+    initTestimonialCoverflow();
+    ScrollTrigger.refresh();
+  }
+
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('site:revealed', init, { once: true });
+
+  // fallback: se o loader já tiver sido removido antes do listener acoplar
+  window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 1500));
+})();
+
+</script>
+</body>
+</html>
